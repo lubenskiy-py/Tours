@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from tkinter.font import names
+
+from flask import Flask, render_template, request
 from models import Tour, db
 
 app = Flask(__name__)
@@ -25,7 +27,11 @@ def tours():
 
 @app.route("/add-departure", methods=["POST"])
 def add_departure():
-    pass
+    data = request.json
+    if not data["name"]:
+        return {"error":"you_invalid(not im)"}, 400
+
+    return {"received": data}, 200
 
 
 if __name__ == "__main__":
