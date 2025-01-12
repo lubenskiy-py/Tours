@@ -18,7 +18,12 @@ def index():
 @app.route("/tours")
 def tours():
     tours = Tour.query.all()
-    return render_template("tours.html")
+    return render_template("tours.html", tours=tours)
+
+
+@app.route("/tour/<int:tour_id>")
+def tour_detail(tour_id):
+    return render_template("tour_detail.html", tour=Tour.query.get_or_404(tour_id))
 
 
 @app.route("/add-departure", methods=["POST"])
